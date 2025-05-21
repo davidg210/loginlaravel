@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Editar de Usuario</title>
+  <title>Editar Usuario</title>
   <style>
     * {
       box-sizing: border-box;
@@ -87,7 +87,7 @@
 </head>
 <body>
   <div class="form-container">
-    <h2>Registro de Usuario</h2>
+    <h2>Editar Usuario</h2>
     <form action="/actualizar/usuario/{{$usuario->id}}" method="POST">
       @csrf
     
@@ -111,8 +111,8 @@
         <input type="file" id="imagen" name="imagen" accept="image/*">
       </div>
 
-        <td>
-            <button>ENVIAR</button>
+        <td style="text-align: center;">
+          <button class="submit-btn">ENVIAR</button>
         </td>
     </form>
     

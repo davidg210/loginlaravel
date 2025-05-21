@@ -29,7 +29,12 @@
                 </td>
                         
 
-
+                <td>
+                    <a href="/cerrar/usuario/{{$user->id}}" rel= "noopener">
+                    
+                        CERRAR SESIÓN
+                        </a>
+                </td>
 
 
             </tr>
