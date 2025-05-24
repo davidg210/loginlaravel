@@ -90,14 +90,50 @@
     .extra a:hover {
       text-decoration: underline;
     }
+
+    .alert {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .alert-success {
+      color: green;
+    }
+
+    .alert-error {
+      color: red;
+    }
   </style>
 </head>
 <body>
-    
   <div class="login-container">
     <h2>Iniciar Sesión</h2>
+
+    {{-- Mensajes flash --}}
+    @if (session('success'))
+      <div class="alert alert-success">
+        {{ session('success') }}
+      </div>
+    @endif
+
+    @if (session('error'))
+      <div class="alert alert-error">
+        {{ session('error') }}
+      </div>
+    @endif
+
+    {{-- Errores de validación --}}
+    @if ($errors->any())
+      <div class="alert alert-error">
+        @foreach ($errors->all() as $error)
+          <div>{{ $error }}</div>
+        @endforeach
+      </div>
+    @endif
+
     <form action="/login" method="POST">
-        @csrf
+      @csrf
       <div class="form-group">
         <label for="email">Correo electrónico</label>
         <input type="email" id="email" name="email" placeholder="tucorreo@example.com" required />
