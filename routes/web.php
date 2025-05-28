@@ -13,10 +13,6 @@ Route::get('/usuarios', function () {
     return view('usuarios');
 });
 
-/*Route::get('/formulario-envio', function () {
-    return view('mail_notification_template');
-});*/
-
 Route::get('/login', [LoginController::class,"index"])->name('login');
 Route::post('/login', [LoginController::class,"login"]);//->name('login.sesion');
 
@@ -33,11 +29,13 @@ Route::middleware(['auth', 'account'])->group(function () {
     Route::post("/actualizar/usuario/{id}", [UsersController::class,"update"]);
     Route::get("/cerrar/usuario/{id}", [LoginController::class,"logout"]);
 
+    Route::resource('posts' , BlogController::class);
+    Route::get('/posts/eliminar/{id}', [BlogController::class, 'destroy']);
     
 
 });
 
-    Route::resource('post' , BlogController::class);
+    
     
     /*Route::get("/usuarios", [UsersController::class,"index"]);
     Route::post("/usuarios", [UsersController::class,"store"]);

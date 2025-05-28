@@ -143,9 +143,7 @@
         <input type="password" id="password" name="password" placeholder="********" required />
       </div>
       <button type="submit" class="btn-login">Entrar</button>
-      <div class="extra">
-        ¿No tienes cuenta? <a href="#">Regístrate</a>
-      </div>
+      
     </form>
   </div>
 </body>

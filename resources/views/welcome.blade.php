@@ -113,9 +113,7 @@
 
       <button type="submit" class="submit-btn">Registrarse</button>
     </form>
-    <div class="form-footer">
-      ¿Ya tienes cuenta? <a href="#">Inicia sesión</a>
-    </div>
+    
   </div>
 </body>
 </html>
