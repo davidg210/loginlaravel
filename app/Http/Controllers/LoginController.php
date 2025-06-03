@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    
+
     /*public function index(Request $request)
     {
         Auth::logout();
@@ -23,9 +23,9 @@ class LoginController extends Controller
     return view('login');
 }
 
-    
-    
-    public function login(Request $request)
+
+
+    /*public function login(Request $request)
     {
         //return redirect("/usuarios");//->route('home');
 
@@ -34,25 +34,47 @@ class LoginController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
- 
+
         if (Auth::attempt($credentials)) {
-            
+
             $request->session()->regenerate();
- 
+
             return redirect()->intended('/usuarios');
         }
- 
+
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
+    }*/
+
+    public function login()
+    {
+        $credentials = request(['email', 'password']);
+
+        if (! $token = auth()->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        return $this->respondWithToken($token);
     }
-    
+
+
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'user' => auth()->user('api'),
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60
+        ]);
+    }
+
 
     public function logout(Request $request){
 
-        Auth::logout(); 
-        $request->session()->invalidate(); 
-        $request->session()->regenerateToken(); 
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
         return redirect('/login');
     }
@@ -64,12 +86,12 @@ class LoginController extends Controller
         if ($user && $user->remember_token == $token) {
             $user->remember_token = null;
             $user->save();
-            return redirect('/login')->with('success' , 'Account confirmed successfully.'); 
+            return redirect('/login')->with('success' , 'Account confirmed successfully.');
 
         } else {
             return redirect('/login')->with('error' , 'Invalid token.');
         }
     }
-      
+
 }
 

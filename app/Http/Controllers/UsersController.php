@@ -8,7 +8,7 @@ use App\Notifications\UserNotification;
 use Illuminate\Http\Request;
 
 
-class UsersController extends Controller  
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +24,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -50,10 +50,13 @@ class UsersController extends Controller
 
         $user-> save();
 
-        $user->notify(new UserNotification()); 
+        $user->notify(new UserNotification());
 
         //return redirect()->intended('/usuarios');
-        return redirect()->back();
+        //return redirect()->back();
+        return response()->json([
+            'message'=>'Usuario creado correctamente, por favor revisa tu correo para activar tu cuenta.'
+        ],201);
     }
 
     /**
