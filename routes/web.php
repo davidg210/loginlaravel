@@ -19,7 +19,7 @@ Route::post('/login', [LoginController::class,"login"]);//->name('login.sesion')
 Route::post("/usuarios", [UsersController::class,"store"]);
 Route::post("/store",[UsersController::class,"store"]);
 
-Route::post("/user/register",[UsersController::class,"store"]);
+//Route::post("/user/register",[UsersController::class,"store"]);
 
 Route::get('/users/active/account/{token}' , [LoginController::class,"validateAccount"]);
 
